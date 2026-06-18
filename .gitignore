@@ -1,0 +1,35 @@
+# dependencies
+/node_modules
+
+# next.js build output
+/.next
+/out
+
+# uncompressed source videos — not used by the build (public/ holds the
+# compressed versions Netlify actually serves). 280+ MB, kept local only.
+/video-originals
+
+# claude code local settings
+/.claude
+
+# production bundle / local artifacts
+/hypit-b2b-site-netlify.zip
+
+# env files
+.env
+.env*.local
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# os / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

@@ -1,0 +1,180 @@
+@import "tailwindcss";
+
+/* ----------------------------------------------------------------------------
+   Hypit design tokens — sampled directly from the design-system source files.
+   Base is near-black; the single brand hue is pink. Everything else is restraint.
+---------------------------------------------------------------------------- */
+@theme {
+  /* Background / surfaces */
+  --color-canvas: #050505;
+  --color-surface-100: #0f0f0f;
+  --color-surface-200: #161616;
+  --color-surface-300: #1a1a1a;
+
+  /* Brand pink ramp */
+  --color-pink-100: #f6c1d7;
+  --color-pink-200: #f3a6c6; /* primary brand */
+  --color-pink-300: #ee8fba; /* hover / emphasis */
+  --color-pink-400: #d96e9c;
+
+  /* Text */
+  --color-ink: #ffffff;
+  --color-ink-200: #b4b4b4;
+  --color-muted: #8e8e8e;
+  --color-faint: #505050;
+
+  --font-sans: var(--font-manrope), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: var(--font-jb), ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* --------------------------------------------------------------------------
+     Type scale — Manrope content steps, straight from the Typography System.
+     Each token emits a `text-*` utility carrying size / line-height / weight.
+     Format below: size · line-height · weight.
+  -------------------------------------------------------------------------- */
+  --text-display-xl: 64px;           /* 64 · 72 · 600 — hero display */
+  --text-display-xl--line-height: 72px;
+  --text-display-xl--font-weight: 600;
+  --text-display-xl--letter-spacing: -0.02em;
+
+  --text-display-l: 48px;            /* 48 · 56 · 600 — landing section */
+  --text-display-l--line-height: 56px;
+  --text-display-l--font-weight: 600;
+  --text-display-l--letter-spacing: -0.02em;
+
+  --text-h1: 40px;                   /* 40 · 48 · 700 — page title */
+  --text-h1--line-height: 48px;
+  --text-h1--font-weight: 700;
+  --text-h1--letter-spacing: -0.01em;
+
+  --text-h2: 32px;                   /* 32 · 40 · 700 — section title */
+  --text-h2--line-height: 40px;
+  --text-h2--font-weight: 700;
+  --text-h2--letter-spacing: -0.01em;
+
+  --text-title-dash: 28px;           /* 28 · 36 · 600 — dashboard greeting */
+  --text-title-dash--line-height: 36px;
+  --text-title-dash--font-weight: 600;
+
+  --text-h3: 24px;                   /* 24 · 32 · 600 — variant heading */
+  --text-h3--line-height: 32px;
+  --text-h3--font-weight: 600;
+
+  --text-title: 20px;                /* 20 · 28 · 600 — card / plan title */
+  --text-title--line-height: 28px;
+  --text-title--font-weight: 600;
+
+  --text-body-l: 16px;               /* 16 · 24 · 500 — long-form prose */
+  --text-body-l--line-height: 24px;
+  --text-body-l--font-weight: 500;
+
+  --text-body-m: 16px;               /* 16 · 24 · 400 — body / FAQ */
+  --text-body-m--line-height: 24px;
+  --text-body-m--font-weight: 400;
+
+  --text-body-s: 14px;               /* 14 · 20 · 400 — CTAs, tabs */
+  --text-body-s--line-height: 20px;
+  --text-body-s--font-weight: 400;
+
+  --text-title-s: 14px;              /* 14 · 20 · 600 — dense heading */
+  --text-title-s--line-height: 20px;
+  --text-title-s--font-weight: 600;
+
+  --text-body-label: 12px;           /* 12 · 16 · 500 — chips, badges */
+  --text-body-label--line-height: 16px;
+  --text-body-label--font-weight: 500;
+
+  --text-body-medium: 12px;          /* 12 · 16 · 400 — fine print */
+  --text-body-medium--line-height: 16px;
+  --text-body-medium--font-weight: 400;
+
+  --text-label: 12px;                /* 12 · 16 · 500 — field / quiet label */
+  --text-label--line-height: 16px;
+  --text-label--font-weight: 500;
+
+  --text-caption: 11px;              /* 11 · 14 · 400 — chip xs */
+  --text-caption--line-height: 14px;
+  --text-caption--font-weight: 400;
+}
+
+/* ----------------------------------------------------------------------------
+   Mono metadata utilities — "mono is structure". These bundle the JetBrains
+   Mono family with the size/transform/tracking the system uses for labels.
+---------------------------------------------------------------------------- */
+@utility text-mono-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 16px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+@utility text-mono-code {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+/* Workflow Engine: connectors "flow" and the core node glow gently pulses. */
+@keyframes flow-dash {
+  to {
+    stroke-dashoffset: -16;
+  }
+}
+@keyframes engine-pulse {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.1);
+  }
+}
+
+/* Capability marquee: two rows scrolling in opposite directions, seamless
+   because the pill set is duplicated and the track shifts by exactly 50%. */
+@keyframes marquee-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes marquee-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* Honour reduced-motion: kill the float loops for users who ask for it. */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
