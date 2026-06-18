@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useRef } from "react";
 
 export type VideoCardData = {
   label: string;
@@ -39,20 +38,6 @@ export function VideoCard({
   delay,
   opacity = 1,
 }: VideoCardProps) {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  // Hover to play; on leave, pause and rewind to the first frame so the card
-  // settles back to a clean poster state.
-  const handleEnter = () => {
-    videoRef.current?.play().catch(() => {});
-  };
-  const handleLeave = () => {
-    const v = videoRef.current;
-    if (!v) return;
-    v.pause();
-    v.currentTime = 0;
-  };
-
   return (
     <motion.div
       initial={{ y: 0 }}
@@ -78,8 +63,6 @@ export function VideoCard({
         />
 
         <div
-          onMouseEnter={handleEnter}
-          onMouseLeave={handleLeave}
           className={`relative ${widthClass} aspect-[9/16] overflow-hidden rounded-[8px] border border-white/10 bg-surface-200 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.8)] ring-1 ring-inset ring-white/[0.06]`}
           style={{
             // Safari (Apple screens) won't clip a covered <video> to the
@@ -99,13 +82,13 @@ export function VideoCard({
               "product light" blob stands in. */}
           {video ? (
             <video
-              ref={videoRef}
               className="absolute inset-0 h-full w-full rounded-[8px] object-cover"
               src={video}
+              autoPlay
               loop
               muted
               playsInline
-              preload="metadata"
+              preload="auto"
             />
           ) : (
             <div
@@ -125,13 +108,13 @@ export function VideoCard({
             className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/65 to-transparent"
           />
 
-          {/* Top label chip — max-width + wrapping keeps long labels inside the
-              narrow frame instead of being clipped by overflow-hidden. */}
-          <div className="absolute left-3 top-3 inline-flex max-w-[calc(100%-24px)] items-center gap-1.5 rounded-2xl border border-white/10 bg-black/35 px-2.5 py-1 backdrop-blur-md">
+          {/* Top label chip — sits on a single line; labels are kept short
+              enough to fit inside the narrow 9:16 frame. */}
+          <div className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-2xl border border-white/10 bg-black/35 px-2.5 py-1 backdrop-blur-md">
             <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-pink-200 shadow-[0_0_6px_1px] shadow-pink-200/70" />
             {/* Card label = compact Mono Label (smaller than the canonical
                 text-mono-label token, to fit the narrow 9:16 frame) */}
-            <span className="font-mono text-[10px] font-medium uppercase leading-tight tracking-[0.08em] text-white/90">
+            <span className="whitespace-nowrap font-mono text-[10px] font-medium uppercase leading-tight tracking-[0.08em] text-white/90">
               {label}
             </span>
           </div>

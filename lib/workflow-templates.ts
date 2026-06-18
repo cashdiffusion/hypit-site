@@ -5,8 +5,8 @@
  * four input nodes (product images, script, persona, voiceover) flow into a
  * single "Video Complete" output node.
  *
- * Deep Night is the fully-authored template; the other two reuse existing
- * /public engine assets as placeholders until real content is supplied.
+ * Deep Night is the fully-authored template; Tier Reveal reuses existing
+ * /public engine assets as a placeholder until real content is supplied.
  */
 
 export type NodeType = "product" | "script" | "persona" | "voice";
@@ -20,7 +20,7 @@ const cosmic = (glow: string, top: string, bottom: string) =>
 export type WorkflowTemplate = {
   id: string;
   name: string;
-  tagline: string;
+  tagline?: string;
   /** `true` for templates still using placeholder assets. */
   placeholder?: boolean;
   /** [0] Product images — paths under /public (already URL-encoded). */
@@ -40,8 +40,6 @@ export const TEMPLATES: WorkflowTemplate[] = [
   {
     id: "deep-night",
     name: "Deep Night",
-    tagline:
-      "Moody, after-dark beauty spots — slow reveals and a hushed voiceover.",
     products: ["/luna.png", "/Starot.webp"],
     script: [
       "Hook: \"It only works after midnight…\"",
@@ -61,7 +59,6 @@ export const TEMPLATES: WorkflowTemplate[] = [
   {
     id: "tier-reveal",
     name: "Tier Reveal",
-    tagline: "Reveal each plan tier with crisp side-by-side comparisons.",
     placeholder: true,
     products: ["/engine%20pic%201.webp", "/engine%20pic%202.webp"],
     script: [
@@ -78,26 +75,5 @@ export const TEMPLATES: WorkflowTemplate[] = [
     ],
     voice: { name: "Mia — warm, upbeat", duration: "0:15" },
     output: { video: "/engine2.mp4", poster: "/engine%20pic%201.webp" },
-  },
-  {
-    id: "app-tier",
-    name: "App Tier",
-    tagline: "Walk through the app's tiers and standout features in a snappy demo.",
-    placeholder: true,
-    products: ["/engine%20pic%202.webp", "/luna.png"],
-    script: [
-      "Hook: \"The app everyone's gatekeeping\"",
-      "Show each tier's killer feature",
-      "End on the free-trial CTA",
-    ],
-    hook: "Curiosity",
-    personas: [
-      cosmic("#9b6dff", "#1f1733", "#08070d"),
-      cosmic("#5ad1ff", "#10222e", "#05080d"),
-      cosmic("#c77dff", "#221536", "#08060e"),
-      cosmic("#b388ff", "#1f1733", "#08070d"),
-    ],
-    voice: { name: "Kai — bold, energetic", duration: "0:09" },
-    output: { video: "/engine3.mp4" },
   },
 ];

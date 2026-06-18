@@ -47,7 +47,11 @@ export function WorkflowTemplates() {
                     </span>
                   )}
                 </div>
-                <p className="mt-1.5 max-w-lg text-body-s text-muted">{t.tagline}</p>
+                {t.tagline && (
+                  <p className="mt-1.5 max-w-lg text-body-s text-muted">
+                    {t.tagline}
+                  </p>
+                )}
               </div>
               <span
                 aria-disabled="true"

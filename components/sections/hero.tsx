@@ -35,11 +35,11 @@ const LEFT_CARDS: (VideoCardData & {
     x: -610,
   },
   {
-    label: "Wearable Headband Device",
+    label: "Wearable Headband",
     views: "1.2M",
     tone: ["#3a2532", "#241620", "#0e0a0d"],
     blob: "#f3a6c6",
-    video: "/video%20example%202.mp4",
+    video: "/nuromova.mp4",
     rotate: -4,
     widthClass: "w-[172px]",
     duration: 7.8,
@@ -50,33 +50,36 @@ const LEFT_CARDS: (VideoCardData & {
   },
 ];
 
+// Dialogue is listed first so it paints UNDERNEATH "AI App Tier" — the
+// lower-right card reads as sitting further back.
 const RIGHT_CARDS: typeof LEFT_CARDS = [
-  {
-    label: "AI App Tier",
-    views: "1.7M",
-    tone: ["#352433", "#201521", "#0d090c"],
-    blob: "#f3a6c6",
-    video: "/video%203.mp4",
-    rotate: 10,
-    widthClass: "w-[162px]",
-    duration: 7.4,
-    delay: 0.4,
-    opacity: 0.95,
-    vpos: "top-[20%]",
-    x: 545,
-  },
   {
     label: "Dialogue",
     views: "3.1M",
     tone: ["#3c2b2c", "#231a1b", "#0d0908"],
     blob: "#f6c1d7",
     video: "/video%204.mp4",
-    rotate: 13,
+    rotate: 15,
     widthClass: "w-[184px]",
     duration: 8,
     delay: 2,
-    vpos: "bottom-[22%]",
+    opacity: 0.82,
+    vpos: "top-[50%]",
     x: 520,
+  },
+  {
+    label: "AI App Tier",
+    views: "1.7M",
+    tone: ["#352433", "#201521", "#0d090c"],
+    blob: "#f3a6c6",
+    video: "/video%203.mp4",
+    rotate: 6,
+    widthClass: "w-[162px]",
+    duration: 7.4,
+    delay: 0.4,
+    opacity: 0.95,
+    vpos: "top-[20%]",
+    x: 545,
   },
 ];
 
@@ -131,7 +134,10 @@ export function Hero() {
 
         {/* Title */}
         <h1 className="mt-7 text-balance text-ink text-h1 sm:text-display-l sm:whitespace-nowrap lg:text-display-xl">
-          Create Short-form Ads with AI
+          Create Short-form Ads{" "}
+          <span className="font-script font-normal italic text-pink-300">
+            with AI
+          </span>
         </h1>
 
         {/* Subtitle */}

@@ -25,6 +25,7 @@
 
   --font-sans: var(--font-manrope), system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: var(--font-jb), ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-script: var(--font-eb), Garamond, "Times New Roman", serif;
 
   /* --------------------------------------------------------------------------
      Type scale — Manrope content steps, straight from the Typography System.

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { ContactDialog } from "@/components/contact/contact-dialog";
 
 const MENU = [
   { label: "WORKFLOWS", href: "/workflows" },
@@ -13,6 +14,7 @@ const MENU = [
 export function Nav() {
   // Transparent over the hero; translucent blur once the page scrolls under it.
   const [scrolled, setScrolled] = useState(false);
+  const [demoOpen, setDemoOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -61,17 +63,19 @@ export function Nav() {
 
         {/* Right actions */}
         <div className="flex items-center gap-3">
-          <Link
-            href="#"
+          <button
+            onClick={() => setDemoOpen(true)}
             className="group inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-2 text-[13px] font-medium tracking-[0.1em] text-canvas transition-colors hover:bg-white/90"
           >
             BOOK A DEMO
             <span className="transition-transform duration-300 group-hover:translate-x-0.5">
               →
             </span>
-          </Link>
+          </button>
         </div>
       </nav>
+
+      <ContactDialog open={demoOpen} onClose={() => setDemoOpen(false)} />
     </header>
   );
 }
