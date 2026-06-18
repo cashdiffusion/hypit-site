@@ -32,7 +32,7 @@ const LEFT_CARDS: (VideoCardData & {
     duration: 8.5,
     delay: 0.4,
     vpos: "top-[14%]",
-    x: -610,
+    x: -535,
   },
   {
     label: "Wearable Headband",
@@ -46,12 +46,11 @@ const LEFT_CARDS: (VideoCardData & {
     delay: 1.4,
     opacity: 0.9,
     vpos: "top-[50%]",
-    x: -520,
+    x: -445,
   },
 ];
 
-// Dialogue is listed first so it paints UNDERNEATH "AI App Tier" — the
-// lower-right card reads as sitting further back.
+// The first entry paints underneath the second where the two overlap.
 const RIGHT_CARDS: typeof LEFT_CARDS = [
   {
     label: "Dialogue",
@@ -64,8 +63,8 @@ const RIGHT_CARDS: typeof LEFT_CARDS = [
     duration: 8,
     delay: 2,
     opacity: 0.82,
-    vpos: "top-[50%]",
-    x: 520,
+    vpos: "top-[20%]",
+    x: 535,
   },
   {
     label: "AI App Tier",
@@ -78,28 +77,64 @@ const RIGHT_CARDS: typeof LEFT_CARDS = [
     duration: 7.4,
     delay: 0.4,
     opacity: 0.95,
-    vpos: "top-[20%]",
-    x: 545,
+    vpos: "top-[50%]",
+    x: 445,
   },
 ];
 
 export function Hero() {
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 pb-[10vh]">
-      {/* Ambient pink glow — the only colour in an otherwise black field */}
+      {/* Layered blurred-black backdrop — soft colour glows drifting over a
+          near-black field, a faint film grain, and a vignette that fades the
+          edges to pure black for that deep, out-of-focus look. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-1/2 h-[640px] w-[640px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[140px]"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(243,166,198,0.16) 0%, rgba(243,166,198,0.04) 45%, transparent 70%)",
-        }}
-      />
-      {/* Subtle bottom vignette */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-canvas to-transparent"
-      />
+        className="pointer-events-none absolute inset-0 overflow-hidden"
+      >
+        {/* primary pink glow, upper-centre */}
+        <div
+          className="absolute left-1/2 top-[32%] h-[720px] w-[860px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[170px]"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(243,166,198,0.20) 0%, rgba(243,166,198,0.05) 45%, transparent 70%)",
+          }}
+        />
+        {/* mauve glow, lower-left */}
+        <div
+          className="absolute left-[16%] top-[82%] h-[560px] w-[560px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[160px]"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(155,109,255,0.14) 0%, transparent 65%)",
+          }}
+        />
+        {/* warm pink glow, right */}
+        <div
+          className="absolute left-[88%] top-[44%] h-[480px] w-[480px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-[160px]"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(238,143,186,0.12) 0%, transparent 65%)",
+          }}
+        />
+        {/* film grain */}
+        <div
+          className="absolute inset-0 opacity-[0.05] mix-blend-soft-light"
+          style={{
+            backgroundImage:
+              "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+          }}
+        />
+        {/* edge vignette to pure black */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(120% 95% at 50% 38%, transparent 52%, rgba(5,5,5,0.9) 100%)",
+          }}
+        />
+        {/* bottom fade into the next section */}
+        <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-canvas to-transparent" />
+      </div>
 
       {/* Floating side cards — purely decorative, hidden on smaller screens.
           Each is anchored to the hero CENTRE (left-1/2 + a fixed px offset),
@@ -133,7 +168,7 @@ export function Hero() {
         </div>
 
         {/* Title */}
-        <h1 className="mt-7 text-balance text-ink text-h1 sm:text-display-l sm:whitespace-nowrap lg:text-display-xl">
+        <h1 className="mt-7 text-balance text-ink text-h1 sm:text-display-l sm:whitespace-nowrap lg:text-[54px] lg:leading-[1.1] lg:tracking-[-0.02em]">
           Create Short-form Ads{" "}
           <span className="font-script font-normal italic text-pink-300">
             with AI
