@@ -144,7 +144,7 @@ export function Hero() {
         <div className="mt-9 flex flex-col items-center gap-3 sm:flex-row">
           <BookDemoCta />
           <Link
-            href="/case-study"
+            href="/workflows"
             className="group inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.03] px-6 py-3 text-body-s font-medium tracking-[0.06em] text-ink transition-colors duration-300 hover:border-white/25 hover:bg-white/[0.07]"
           >
             VIEW EXAMPLE WORKFLOWS
