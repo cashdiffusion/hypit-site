@@ -157,7 +157,7 @@ export function Hero() {
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
-        className="relative z-10 mx-auto flex max-w-5xl flex-col items-center text-center"
+        className="relative top-[15%] z-10 mx-auto flex max-w-5xl flex-col items-center text-center"
       >
         {/* Badge */}
         <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-1.5 shadow-[0_0_24px_-4px_rgba(243,166,198,0.35)] backdrop-blur-sm">
