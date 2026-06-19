@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Nav } from "@/components/sections/nav";
+import { ContactCtaButton } from "@/components/contact/contact-cta-button";
 import { Footer } from "@/components/sections/footer";
 import { CaseGallery } from "@/components/case-study/case-gallery";
 
@@ -525,15 +525,11 @@ export default function CaseStudyPage() {
           <p className="mx-auto mt-4 max-w-md text-body-s text-muted">
             Turn your winning videos into a repeatable AI ad workflow.
           </p>
-          <Link
-            href="/#features"
+          <ContactCtaButton
+            label="SEE HOW IT WORKS"
+            eyebrow="See how it works"
             className="group mt-8 inline-flex items-center gap-1.5 rounded-full bg-pink-200 px-6 py-3 text-body-s font-medium tracking-[0.06em] text-canvas transition-colors duration-300 hover:bg-pink-300"
-          >
-            SEE HOW IT WORKS
-            <span className="transition-transform duration-300 group-hover:translate-x-0.5">
-              →
-            </span>
-          </Link>
+          />
         </section>
       </article>
 

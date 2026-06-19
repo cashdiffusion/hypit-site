@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import { DISCORD_INVITE } from "@/lib/links";
 
 const COLUMNS = [
   {
@@ -16,7 +15,7 @@ const COLUMNS = [
 const SOCIALS: { label: string; href: string; icon: React.ReactNode }[] = [
   {
     label: "Discord",
-    href: DISCORD_INVITE,
+    href: "/community",
     icon: (
       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
         <path d="M19.3 5.4A17 17 0 0 0 15 4l-.3.5a13 13 0 0 1 3.7 1.8 12 12 0 0 0-10.8 0A13 13 0 0 1 11.3 4.5L11 4a17 17 0 0 0-4.3 1.4C3.9 9.5 3.1 13.5 3.5 17.5a17 17 0 0 0 5.2 2.6l.6-1.6-1.5-.7.4-.3a12 12 0 0 0 10.6 0l.4.3-1.5.7.6 1.6a17 17 0 0 0 5.2-2.6c.5-4.7-.8-8.7-3.2-12.1ZM9.5 15c-.8 0-1.5-.8-1.5-1.7s.7-1.7 1.5-1.7 1.5.8 1.5 1.7-.7 1.7-1.5 1.7Zm5 0c-.8 0-1.5-.8-1.5-1.7s.7-1.7 1.5-1.7 1.5.8 1.5 1.7-.7 1.7-1.5 1.7Z" />
@@ -34,7 +33,7 @@ const SOCIALS: { label: string; href: string; icon: React.ReactNode }[] = [
   },
   {
     label: "Instagram",
-    href: "#",
+    href: "https://www.instagram.com/hypit_ai?igsh=MWF2YjM0bml3NWJ2Nw==",
     icon: (
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none">
         <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" strokeWidth="1.7" />
@@ -97,15 +96,28 @@ export function Footer() {
               <h3 className="text-[13px] font-semibold text-ink">{col.title}</h3>
               <ul className="mt-4 space-y-3">
                 {col.links.map((l) => {
-                  const href = l === "Community" ? "/community" : "#";
+                  // Community is live (Discord redirect); the rest are not
+                  // built yet — hovering them surfaces a "Coming soon" tag.
+                  if (l === "Community") {
+                    return (
+                      <li key={l}>
+                        <Link
+                          href="/community"
+                          className="text-body-s text-muted transition-colors hover:text-ink"
+                        >
+                          {l}
+                        </Link>
+                      </li>
+                    );
+                  }
                   return (
                     <li key={l}>
-                      <Link
-                        href={href}
-                        className="text-body-s text-muted transition-colors hover:text-ink"
-                      >
+                      <span className="group relative inline-flex cursor-default text-body-s text-muted transition-colors hover:text-ink">
                         {l}
-                      </Link>
+                        <span className="pointer-events-none absolute -top-7 left-0 z-20 whitespace-nowrap rounded-md border border-white/10 bg-surface-300 px-2 py-1 text-[11px] font-medium text-ink-200 opacity-0 shadow-lg transition-opacity duration-200 group-hover:opacity-100">
+                          Coming soon
+                        </span>
+                      </span>
                     </li>
                   );
                 })}

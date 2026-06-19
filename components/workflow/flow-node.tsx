@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { NodeType, WorkflowTemplate } from "@/lib/workflow-templates";
+import { VoiceWave } from "@/components/workflow/voice-wave";
 
 /* Line icons, one per input node type — sized to match node-card.tsx. */
 const ICONS: Record<NodeType, React.ReactNode> = {
@@ -37,32 +38,49 @@ const TITLES: Record<NodeType, string> = {
   voice: "Voiceover",
 };
 
-/* Deterministic-looking waveform bar heights (no Math.random in render). */
-const BARS = [5, 9, 14, 8, 17, 11, 6, 13, 19, 10, 7, 15, 9, 5, 12, 8, 16, 6];
-
 function NodeBody({ type, t }: { type: NodeType; t: WorkflowTemplate }) {
   switch (type) {
-    case "product":
+    case "product": {
+      // Always show four slots; fill the gaps with a placeholder tile.
+      const slots = Array.from({ length: 4 }, (_, i) => t.products[i]);
       return (
-        <div className="grid grid-cols-2 gap-1.5">
-          {t.products.slice(0, 4).map((src, i) => (
+        <div className="grid grid-cols-2 gap-2">
+          {slots.map((src, i) => (
             <div
               key={i}
               className="relative aspect-square overflow-hidden rounded-md border border-white/5 bg-surface-300"
             >
-              <Image src={src} alt="" fill sizes="80px" className="object-cover" />
+              {src ? (
+                <Image src={src} alt="" fill sizes="130px" className="object-cover" />
+              ) : (
+                <div
+                  className="flex h-full w-full items-center justify-center text-faint"
+                  style={{
+                    backgroundImage:
+                      "repeating-linear-gradient(45deg, rgba(255,255,255,0.04) 0 6px, transparent 6px 12px)",
+                  }}
+                >
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                  </svg>
+                </div>
+              )}
+              <span className="absolute left-1 top-1 flex h-4 w-4 items-center justify-center rounded bg-black/55 font-mono text-[9px] font-medium text-white/90 backdrop-blur-sm">
+                {i + 1}
+              </span>
             </div>
           ))}
         </div>
       );
+    }
     case "script":
       return (
-        <div className="space-y-1.5">
-          <span className="inline-flex items-center rounded-md bg-pink-200/15 px-1.5 py-0.5 text-[10px] font-medium text-pink-200">
+        <div className="space-y-2">
+          <span className="inline-flex items-center rounded-md bg-pink-200/15 px-2 py-0.5 text-[11px] font-medium text-pink-200">
             Hook · {t.hook}
           </span>
           {t.script.map((line, i) => (
-            <p key={i} className="text-[11px] leading-snug text-ink-200">
+            <p key={i} className="text-[12.5px] leading-snug text-ink-200">
               {line}
             </p>
           ))}
@@ -70,12 +88,14 @@ function NodeBody({ type, t }: { type: NodeType; t: WorkflowTemplate }) {
       );
     case "persona":
       return (
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2.5">
           {t.personas.slice(0, 4).map((bg, i) => (
             <div
               key={i}
-              className={`h-9 w-9 rounded-full bg-cover ${
-                i === 0 ? "ring-2 ring-pink-200 ring-offset-2 ring-offset-surface-200" : "opacity-70"
+              className={`h-12 w-12 rounded-full bg-cover bg-center ${
+                i === (t.personaSelected ?? 0)
+                  ? "ring-2 ring-pink-200 ring-offset-2 ring-offset-surface-200"
+                  : "opacity-70"
               }`}
               style={{ background: bg }}
             />
@@ -84,21 +104,11 @@ function NodeBody({ type, t }: { type: NodeType; t: WorkflowTemplate }) {
       );
     case "voice":
       return (
-        <div>
-          <div className="flex h-8 items-center gap-[3px]">
-            {BARS.map((h, i) => (
-              <span
-                key={i}
-                className="w-[3px] rounded-full bg-pink-200/60"
-                style={{ height: `${h}px` }}
-              />
-            ))}
-          </div>
-          <div className="mt-2 flex items-center justify-between text-[10px] text-muted">
-            <span className="truncate">{t.voice.name}</span>
-            <span className="font-mono text-ink-200">{t.voice.duration}</span>
-          </div>
-        </div>
+        <VoiceWave
+          name={t.voice.name}
+          duration={t.voice.duration}
+          audio={t.voice.audio}
+        />
       );
   }
 }

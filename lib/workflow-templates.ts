@@ -11,12 +11,6 @@
 
 export type NodeType = "product" | "script" | "persona" | "voice";
 
-/** A cosmic gradient string used for persona placeholder circles (no headshot
-    assets exist yet — swap `personas` for image paths when they do). */
-const cosmic = (glow: string, top: string, bottom: string) =>
-  `radial-gradient(120% 90% at 50% 18%, ${glow} 0%, transparent 55%), ` +
-  `linear-gradient(160deg, ${top} 0%, ${bottom} 100%)`;
-
 export type WorkflowTemplate = {
   id: string;
   name: string;
@@ -28,10 +22,13 @@ export type WorkflowTemplate = {
   /** [1] Script — a few short lines, plus the hook label. */
   script: string[];
   hook: string;
-  /** [2] Persona — gradient recipes for the avatar circles; first is selected. */
+  /** [2] Persona — CSS `background` values for the avatar circles (an
+      `url(...) center/cover` image or a gradient recipe). */
   personas: string[];
-  /** [3] Voiceover — voice name + clip duration. */
-  voice: { name: string; duration: string };
+  /** Index of the highlighted persona (defaults to 0). */
+  personaSelected?: number;
+  /** [3] Voiceover — voice name + clip duration + optional playable clip. */
+  voice: { name: string; duration: string; audio?: string };
   /** Output — the finished short-form video. */
   output: { video: string; poster?: string };
 };
@@ -40,7 +37,12 @@ export const TEMPLATES: WorkflowTemplate[] = [
   {
     id: "deep-night",
     name: "Deep Night",
-    products: ["/luna.png", "/Starot.webp"],
+    products: [
+      "/Starot.webp",
+      "/engine%20pic%201.webp",
+      "/engine%20pic%202.webp",
+      "/engine%20pic%203.png",
+    ],
     script: [
       "Hook: \"It only works after midnight…\"",
       "Reveal the product in one slow pan",
@@ -48,19 +50,24 @@ export const TEMPLATES: WorkflowTemplate[] = [
     ],
     hook: "Curiosity",
     personas: [
-      cosmic("#f3a6c6", "#301a2e", "#0b0709"),
-      cosmic("#c77dff", "#221536", "#08060e"),
-      cosmic("#9b6dff", "#1f1733", "#08070d"),
-      cosmic("#ff9ecb", "#2e1828", "#0a0608"),
+      "url('/luna.png') center/cover",
+      "url('/nova.png') center/cover",
+      "url('/serina.png') center/cover",
+      "url('/karina.png') center/cover",
     ],
-    voice: { name: "Luna — calm, intimate", duration: "0:12" },
-    output: { video: "/starot1.mp4", poster: "/Starot.webp" },
+    voice: { name: "Luna — calm, intimate", duration: "0:12", audio: "/lunna.mp3" },
+    output: { video: "/example%20video%201.mp4" },
   },
   {
     id: "tier-reveal",
     name: "Tier Reveal",
     placeholder: true,
-    products: ["/engine%20pic%201.webp", "/engine%20pic%202.webp"],
+    products: [
+      "/Starot.webp",
+      "/engine%20pic%201.webp",
+      "/engine%20pic%202.webp",
+      "/engine%20pic%203.png",
+    ],
     script: [
       "Hook: \"Which tier is actually worth it?\"",
       "Compare the tiers side by side, fast",
@@ -68,12 +75,13 @@ export const TEMPLATES: WorkflowTemplate[] = [
     ],
     hook: "Value",
     personas: [
-      cosmic("#ffb877", "#2e2016", "#0b0805"),
-      cosmic("#ff9ecb", "#2e1828", "#0a0608"),
-      cosmic("#f3a6c6", "#301a2e", "#0b0709"),
-      cosmic("#d6a8ff", "#281a3a", "#09070f"),
+      "url('/luna.png') center/cover",
+      "url('/nova.png') center/cover",
+      "url('/serina.png') center/cover",
+      "url('/karina.png') center/cover",
     ],
-    voice: { name: "Mia — warm, upbeat", duration: "0:15" },
-    output: { video: "/engine2.mp4", poster: "/engine%20pic%201.webp" },
+    personaSelected: 2,
+    voice: { name: "Mia — warm, upbeat", duration: "0:15", audio: "/voice%202.mp3" },
+    output: { video: "/video%20example%202.mp4" },
   },
 ];

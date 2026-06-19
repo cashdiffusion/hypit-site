@@ -1,4 +1,8 @@
+"use client";
+
 import Image from "next/image";
+import { useState } from "react";
+import { ContactDialog } from "@/components/contact/contact-dialog";
 
 /* Static starfield — deterministic positions so SSR and client match. */
 const STARS = [
@@ -19,6 +23,8 @@ const STARS = [
 ];
 
 export function FinalCta() {
+  const [contactOpen, setContactOpen] = useState(false);
+
   return (
     <section className="relative overflow-hidden bg-canvas px-6 pb-16 pt-28 lg:pt-36">
       {/* starfield */}
@@ -50,16 +56,22 @@ export function FinalCta() {
           Find What Works. Scale What Wins.
         </h2>
 
-        <a
-          href="#"
+        <button
+          onClick={() => setContactOpen(true)}
           className="group mt-9 inline-flex items-center gap-1.5 rounded-full bg-white px-6 py-3 text-body-s font-medium tracking-[0.04em] text-canvas transition-colors duration-300 hover:bg-white/90"
         >
           Contact Us
           <svg width="13" height="13" viewBox="0 0 16 16" fill="none" className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
             <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
-        </a>
+        </button>
       </div>
+
+      <ContactDialog
+        open={contactOpen}
+        onClose={() => setContactOpen(false)}
+        eyebrow="Contact us"
+      />
     </section>
   );
 }

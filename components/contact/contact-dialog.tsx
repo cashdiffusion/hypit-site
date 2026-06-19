@@ -7,9 +7,12 @@ import { CALENDAR_LINK, CONTACT_EMAIL } from "@/lib/links";
 export function ContactDialog({
   open,
   onClose,
+  eyebrow = "Book a demo",
 }: {
   open: boolean;
   onClose: () => void;
+  /** Small label above "Let's talk" — defaults to "Book a demo". */
+  eyebrow?: string;
 }) {
   useEffect(() => {
     if (!open) return;
@@ -48,7 +51,7 @@ export function ContactDialog({
               </svg>
             </button>
 
-            <div className="text-mono-label text-pink-300">Book a demo</div>
+            <div className="text-mono-label text-pink-300">{eyebrow}</div>
             <h3 className="mt-2 text-h3 text-ink">Let&apos;s talk</h3>
             <p className="mt-1.5 text-body-s text-muted">
               Reach us by email or schedule a call — we&apos;ll get back fast.

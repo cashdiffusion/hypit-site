@@ -1,5 +1,5 @@
 /** Shared external links + contact details. */
-export const DISCORD_INVITE = "https://discord.gg/U37zBpjq";
+export const DISCORD_INVITE = "https://discord.gg/BEZtPAPw";
 
 /** Contact. */
 export const CONTACT_EMAIL = "official@hypit.ai";
