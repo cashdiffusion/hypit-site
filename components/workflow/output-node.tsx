@@ -68,7 +68,7 @@ export function OutputNode({ template }: { template: WorkflowTemplate }) {
       <div className="group relative aspect-[9/16] overflow-hidden rounded-md border border-white/10 bg-surface-300">
         <video
           ref={videoRef}
-          src={template.output.video}
+          src={template.output.preview ?? template.output.video}
           poster={template.output.poster}
           muted
           loop

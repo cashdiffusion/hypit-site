@@ -29,8 +29,9 @@ export type WorkflowTemplate = {
   personaSelected?: number;
   /** [3] Voiceover — voice name + clip duration + optional playable clip. */
   voice: { name: string; duration: string; audio?: string };
-  /** Output — the finished short-form video. */
-  output: { video: string; poster?: string };
+  /** Output — the finished short-form video. `preview` is a lightweight clip
+      for the inline card; `video` is the full-quality file for the modal. */
+  output: { video: string; poster?: string; preview?: string };
 };
 
 export const TEMPLATES: WorkflowTemplate[] = [
@@ -56,7 +57,10 @@ export const TEMPLATES: WorkflowTemplate[] = [
       "url('/karina.png') center/cover",
     ],
     voice: { name: "Luna — calm, intimate", duration: "0:12", audio: "/lunna.mp3" },
-    output: { video: "/example%20video%201.mp4" },
+    output: {
+      video: "/example%20video%201.mp4",
+      preview: "/example%20video%201.preview.mp4",
+    },
   },
   {
     id: "tier-reveal",
@@ -82,6 +86,9 @@ export const TEMPLATES: WorkflowTemplate[] = [
     ],
     personaSelected: 2,
     voice: { name: "Mia — warm, upbeat", duration: "0:15", audio: "/voice%202.mp3" },
-    output: { video: "/video%20example%202.mp4" },
+    output: {
+      video: "/video%20example%202.mp4",
+      preview: "/video%20example%202.preview.mp4",
+    },
   },
 ];
