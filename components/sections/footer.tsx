@@ -24,7 +24,7 @@ const SOCIALS: { label: string; href: string; icon: React.ReactNode }[] = [
   },
   {
     label: "TikTok",
-    href: "#",
+    href: "https://www.tiktok.com/@hypitai",
     icon: (
       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
         <path d="M16 3c.3 2.3 1.8 4 4 4.3V10c-1.5 0-2.9-.5-4-1.3v6.6a5.8 5.8 0 1 1-5.8-5.8c.3 0 .6 0 .9.1v2.9a3 3 0 1 0 2 2.8V3H16Z" />

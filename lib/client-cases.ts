@@ -1,7 +1,8 @@
 /**
- * Client Cases content. Imagery is CSS-gradient placeholder (moody / lit
- * subject) until real campaign stills are supplied. Noonwake copy is
- * illustrative — swap for real client data.
+ * Client Cases content. Clients (Starot, Nuromova) are real and the imagery is
+ * their real campaign footage, with a CSS gradient as a loading fallback.
+ * The `value` / `delta` figures are illustrative, directional engagement
+ * indicators — rounded approximations, not audited metrics.
  */
 
 export type Token = { text: string; pink?: boolean };
@@ -48,8 +49,8 @@ export const CLIENTS: Client[] = [
         id: "w1",
         headline: [{ text: "Calm in " }, { text: "one breath.", pink: true }],
         tag: "Performance Hook",
-        value: "21.4K",
-        delta: "+64%",
+        value: "20K+",
+        delta: "+60%",
         bg: cool("#4a5575"),
         video: "/starot1.mp4",
       },
@@ -60,8 +61,8 @@ export const CLIENTS: Client[] = [
           { text: "a week.", pink: true },
         ],
         tag: "UGC Story",
-        value: "76.8K",
-        delta: "+58%",
+        value: "75K+",
+        delta: "+55%",
         bg: cool("#445070"),
         video: "/starot2.mp4",
       },
@@ -69,8 +70,8 @@ export const CLIENTS: Client[] = [
         id: "w3",
         headline: [{ text: "Your mind, " }, { text: "guided.", pink: true }],
         tag: "App Walkthrough",
-        value: "58.2K",
-        delta: "+49%",
+        value: "55K+",
+        delta: "+50%",
         bg: cool("#4e4a72"),
         video: "/starot3.mp4",
       },
@@ -81,8 +82,8 @@ export const CLIENTS: Client[] = [
           { text: "clearer.", pink: true },
         ],
         tag: "Benefit Hook",
-        value: "47.5K",
-        delta: "+41%",
+        value: "45K+",
+        delta: "+40%",
         bg: cool("#3f5566"),
         video: "/starot4.mp4",
       },
@@ -90,7 +91,7 @@ export const CLIENTS: Client[] = [
         id: "w5",
         headline: [{ text: "Less noise. " }, { text: "More you.", pink: true }],
         tag: "Lifestyle Hook",
-        value: "33.9K",
+        value: "30K+",
         delta: "+35%",
         bg: cool("#48506e"),
         video: "/starot5.mp4",
@@ -108,8 +109,8 @@ export const CLIENTS: Client[] = [
         id: "n1",
         headline: [],
         tag: "Performance Hook",
-        value: "12.6K",
-        delta: "+88%",
+        value: "12K+",
+        delta: "+90%",
         bg: warm("#6a5560"),
         video: "/nuromova.mp4",
       },

@@ -26,7 +26,7 @@ const LEFT_CARDS: (VideoCardData & {
     views: "860K",
     tone: ["#332a36", "#1f1822", "#0d0a0c"],
     blob: "#ee8fba",
-    video: "/example%20video%201.mp4",
+    video: "/example%20video%201.preview.mp4",
     rotate: -8,
     widthClass: "w-[208px]",
     duration: 8.5,
