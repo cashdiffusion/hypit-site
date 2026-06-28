@@ -59,8 +59,11 @@ full-resolution version loads only when a viewer expands a card.
 
 ## Deployment
 
-Hosted on **Netlify**, deployed from GitHub (`yw2675/hypit-site`) — pushing to
-`main` triggers a build automatically.
+Hosted on **Vercel**, deployed from GitHub (`cashdiffusion/hypit-site`) —
+pushing to `main` triggers a build automatically.
 
 - **Build command:** `npm run build`
-- **Publish directory:** `out`
+- **Output directory:** `out`
+
+Legacy language-prefixed URLs (`/en`, `/zh`, …) that search engines indexed are
+301'd to the new prefix-free routes via `vercel.json` redirects.
