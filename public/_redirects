@@ -1,22 +1,35 @@
 # Netlify redirects — copied verbatim to ./out at build time.
 #
-# The old site shipped an /en language prefix that search engines indexed
-# (e.g. a "hypit" search lands on hypit.ai/en). The current build removed that
-# prefix, so those URLs 404. Static export can't use next.config redirects(),
-# so we handle it here with 301s — killing the 404s and passing SEO authority
-# on to the new pages. trailingSlash:true means canonical URLs end in "/".
+# The old site shipped language-prefixed URLs (/en, /zh, …) that search engines
+# indexed. The current build dropped those prefixes, so the old URLs 404. Static
+# export can't use next.config redirects(), so we strip any language prefix here
+# with 301s — killing the 404s and passing SEO authority to the new pages.
+# trailingSlash:true means canonical URLs end in "/".
+#
+# Notes on matching: Netlify won't apply a (non-forced) redirect when a real
+# static file exists at that path, so assets (/engine1.mp4, /_next/*, …) are
+# safe from the catch-all :lang rules below. Existing routes are pinned first so
+# /:lang never mistakes them for a language code.
 
-# Known pages: preserve the path (/en/pricing → /pricing/)
-/en/pricing/*       /pricing/       301
-/en/pricing         /pricing/       301
-/en/community/*     /community/     301
-/en/community       /community/     301
-/en/case-study/*    /case-study/    301
-/en/case-study      /case-study/    301
-/en/workflows/*     /workflows/     301
-/en/workflows       /workflows/     301
+# 1. Existing routes: pin the no-slash form to the canonical trailing-slash
+#    version (also shields them from the /:lang catch-all below).
+/pricing       /pricing/      301
+/community     /community/    301
+/case-study    /case-study/   301
+/workflows     /workflows/    301
 
-# Everything else under /en (home + unknown subpaths) → homepage, so no
-# stale English URL can produce a new 404.
-/en/*               /               301
-/en                 /               301
+# 2. Any language prefix + a known page → drop the prefix, keep the path
+#    (e.g. /en/pricing, /zh/pricing → /pricing/).
+/:lang/pricing/*      /pricing/      301
+/:lang/pricing        /pricing/      301
+/:lang/community/*    /community/    301
+/:lang/community      /community/    301
+/:lang/case-study/*   /case-study/   301
+/:lang/case-study     /case-study/   301
+/:lang/workflows/*    /workflows/    301
+/:lang/workflows      /workflows/    301
+
+# 3. Any language prefix root or unknown subpath → homepage, so no stale
+#    language-prefixed URL can produce a new 404.
+/:lang/*              /              301
+/:lang               /              301
