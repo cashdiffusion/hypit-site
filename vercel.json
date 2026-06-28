@@ -7,7 +7,17 @@
       "permanent": true
     },
     {
+      "source": "/:lang(en|zh|zh-CN|zh-TW|zh-cn|zh-tw|zh-Hans|zh-Hant|ja|ko|es|fr|de|pt|ru|it|ar|hi|id|vi|th|tr|nl|pl)/pricing/:path*/",
+      "destination": "/pricing/",
+      "permanent": true
+    },
+    {
       "source": "/:lang(en|zh|zh-CN|zh-TW|zh-cn|zh-tw|zh-Hans|zh-Hant|ja|ko|es|fr|de|pt|ru|it|ar|hi|id|vi|th|tr|nl|pl)/community/:path*",
+      "destination": "/community/",
+      "permanent": true
+    },
+    {
+      "source": "/:lang(en|zh|zh-CN|zh-TW|zh-cn|zh-tw|zh-Hans|zh-Hant|ja|ko|es|fr|de|pt|ru|it|ar|hi|id|vi|th|tr|nl|pl)/community/:path*/",
       "destination": "/community/",
       "permanent": true
     },
@@ -17,12 +27,37 @@
       "permanent": true
     },
     {
+      "source": "/:lang(en|zh|zh-CN|zh-TW|zh-cn|zh-tw|zh-Hans|zh-Hant|ja|ko|es|fr|de|pt|ru|it|ar|hi|id|vi|th|tr|nl|pl)/case-study/:path*/",
+      "destination": "/case-study/",
+      "permanent": true
+    },
+    {
       "source": "/:lang(en|zh|zh-CN|zh-TW|zh-cn|zh-tw|zh-Hans|zh-Hant|ja|ko|es|fr|de|pt|ru|it|ar|hi|id|vi|th|tr|nl|pl)/workflows/:path*",
       "destination": "/workflows/",
       "permanent": true
     },
     {
+      "source": "/:lang(en|zh|zh-CN|zh-TW|zh-cn|zh-tw|zh-Hans|zh-Hant|ja|ko|es|fr|de|pt|ru|it|ar|hi|id|vi|th|tr|nl|pl)/workflows/:path*/",
+      "destination": "/workflows/",
+      "permanent": true
+    },
+    {
+      "source": "/:lang(en|zh|zh-CN|zh-TW|zh-cn|zh-tw|zh-Hans|zh-Hant|ja|ko|es|fr|de|pt|ru|it|ar|hi|id|vi|th|tr|nl|pl)",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/:lang(en|zh|zh-CN|zh-TW|zh-cn|zh-tw|zh-Hans|zh-Hant|ja|ko|es|fr|de|pt|ru|it|ar|hi|id|vi|th|tr|nl|pl)/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
       "source": "/:lang(en|zh|zh-CN|zh-TW|zh-cn|zh-tw|zh-Hans|zh-Hant|ja|ko|es|fr|de|pt|ru|it|ar|hi|id|vi|th|tr|nl|pl)/:path*",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/:lang(en|zh|zh-CN|zh-TW|zh-cn|zh-tw|zh-Hans|zh-Hant|ja|ko|es|fr|de|pt|ru|it|ar|hi|id|vi|th|tr|nl|pl)/:path*/",
       "destination": "/",
       "permanent": true
     }
