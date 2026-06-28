@@ -1,0 +1,22 @@
+# Netlify redirects — copied verbatim to ./out at build time.
+#
+# The old site shipped an /en language prefix that search engines indexed
+# (e.g. a "hypit" search lands on hypit.ai/en). The current build removed that
+# prefix, so those URLs 404. Static export can't use next.config redirects(),
+# so we handle it here with 301s — killing the 404s and passing SEO authority
+# on to the new pages. trailingSlash:true means canonical URLs end in "/".
+
+# Known pages: preserve the path (/en/pricing → /pricing/)
+/en/pricing/*       /pricing/       301
+/en/pricing         /pricing/       301
+/en/community/*     /community/     301
+/en/community       /community/     301
+/en/case-study/*    /case-study/    301
+/en/case-study      /case-study/    301
+/en/workflows/*     /workflows/     301
+/en/workflows       /workflows/     301
+
+# Everything else under /en (home + unknown subpaths) → homepage, so no
+# stale English URL can produce a new 404.
+/en/*               /               301
+/en                 /               301
